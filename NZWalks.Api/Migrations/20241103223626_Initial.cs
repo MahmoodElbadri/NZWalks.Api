@@ -27,8 +27,7 @@ namespace NZWalks.Api.Migrations
                 name: "Regions",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Code = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RegionImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -48,8 +47,7 @@ namespace NZWalks.Api.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     WalkImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DifficultyId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
-                    RegionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    RegionId1 = table.Column<int>(type: "int", nullable: true)
+                    RegionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,10 +58,11 @@ namespace NZWalks.Api.Migrations
                         principalTable: "Difficulties",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_Walks_Regions_RegionId1",
-                        column: x => x.RegionId1,
+                        name: "FK_Walks_Regions_RegionId",
+                        column: x => x.RegionId,
                         principalTable: "Regions",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -72,9 +71,9 @@ namespace NZWalks.Api.Migrations
                 column: "DifficultyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Walks_RegionId1",
+                name: "IX_Walks_RegionId",
                 table: "Walks",
-                column: "RegionId1");
+                column: "RegionId");
         }
 
         /// <inheritdoc />

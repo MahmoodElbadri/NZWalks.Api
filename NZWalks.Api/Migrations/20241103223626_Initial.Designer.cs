@@ -12,7 +12,7 @@ using NZWalks.Api.Data;
 namespace NZWalks.Api.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241103221226_Initial")]
+    [Migration("20241103223626_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -41,11 +41,9 @@ namespace NZWalks.Api.Migrations
 
             modelBuilder.Entity("NZWalks.Api.Models.Domain.Region", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(max)");
@@ -82,9 +80,6 @@ namespace NZWalks.Api.Migrations
                     b.Property<Guid>("RegionId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("RegionId1")
-                        .HasColumnType("int");
-
                     b.Property<string>("WalkImageUrl")
                         .HasColumnType("nvarchar(max)");
 
@@ -92,7 +87,7 @@ namespace NZWalks.Api.Migrations
 
                     b.HasIndex("DifficultyId");
 
-                    b.HasIndex("RegionId1");
+                    b.HasIndex("RegionId");
 
                     b.ToTable("Walks");
                 });
@@ -105,7 +100,9 @@ namespace NZWalks.Api.Migrations
 
                     b.HasOne("NZWalks.Api.Models.Domain.Region", "Region")
                         .WithMany()
-                        .HasForeignKey("RegionId1");
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Difficulty");
 

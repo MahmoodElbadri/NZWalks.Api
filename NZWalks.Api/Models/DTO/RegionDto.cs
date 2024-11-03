@@ -1,8 +1,8 @@
-﻿using Microsoft.Build.Framework;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace NZWalks.Api.Models.Domain;
+namespace NZWalks.Api.Models.DTO;
 
-public class Region
+public class RegionDto
 {
     public Guid Id { get; set; }
     [Required]
