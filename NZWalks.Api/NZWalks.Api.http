@@ -4,3 +4,11 @@ GET {{NZWalks.Api_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
+DELETE https://localhost:44352/api/Walks/679C4491-D452-4ABC-237D-08DCFD8E6409
+Accept: application/json
+
+###
+GET https://localhost:44352/api/Walks
+Accept: application/json
+
+###

@@ -23,6 +23,7 @@ public class Program
             options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
         });
         builder.Services.AddScoped<IRegionRepository, RegionRepository>();
+        builder.Services.AddScoped<IWalkRepository, WalksRepository>();
         builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
         var app = builder.Build();
