@@ -9,5 +9,7 @@ public class AutoMapperProfiles:Profile
     public AutoMapperProfiles()
     {
         CreateMap<Region, RegionDto>().ReverseMap();
+        CreateMap<Region, RegionAddRequest>().ReverseMap();
+        CreateMap<Region,RegionUpdateRequest>().ReverseMap();
     }
 }

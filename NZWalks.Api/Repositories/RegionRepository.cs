@@ -30,9 +30,9 @@ public class RegionRepository:IRegionRepository
         return region;
     }
 
-    public async Task<Region?> UpdateAsync(Region region)
+    public async Task<Region?> UpdateAsync(Region region,Guid id)
     {
-        var existingRegion = await _db.Regions.FirstOrDefaultAsync(x => x.Id == region.Id);
+        var existingRegion = await _db.Regions.FirstOrDefaultAsync(x => x.Id == id);
         if (existingRegion == null) 
         {
             return null;
