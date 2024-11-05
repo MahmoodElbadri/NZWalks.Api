@@ -32,15 +32,15 @@ namespace NZWalks.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> GetAll([FromQuery] string? filterOn, [FromQuery] string? track)
         {
-            var walks = await _walkRepository.GetAllAsync();
+            var walks = await _walkRepository.GetAllAsync(filterOn:filterOn,filterQuery: track);
             var walkDtos = _mapper.Map<List<WalkDto>>(walks);
             return Ok(walkDtos);
         }
 
         [HttpGet("{id:guid}")]
-        public async Task<IActionResult> GetByIdAsync(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
             var walkModel = await _walkRepository.GetByIdAsync(id);
             if (walkModel != null)

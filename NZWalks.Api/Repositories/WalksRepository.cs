@@ -20,9 +20,24 @@ public class WalksRepository : IWalkRepository
         return walks;
     }
 
-    public async Task<List<Walks>> GetAllAsync()
+    public async Task<List<Walks>> GetAllAsync(string? filterOn = null, string? filterQuery = null)
     {
-        return await _db.Walks.Include(tmp=>tmp.Difficulty).Include(tmp=>tmp.Region).ToListAsync();
+        var walks = _db.Walks.Include(tmp=>tmp.Difficulty)
+            .Include(tmp=>tmp.Region).AsQueryable();
+        if (!string.IsNullOrWhiteSpace(filterQuery) && !string.IsNullOrWhiteSpace(filterOn))
+        {
+            if (filterOn.Equals(nameof(Walks.Name), StringComparison.OrdinalIgnoreCase))
+            {
+                walks = walks.Where(tmp =>tmp.Name != null && tmp.Name.Contains(filterQuery));
+            }
+            else if (filterOn.Equals(nameof(Walks.Description), StringComparison.OrdinalIgnoreCase))
+            {
+                walks = walks.Where(tmp =>tmp.Description != null && tmp.Description.Contains(filterQuery));
+            }
+        }
+
+        return await walks.ToListAsync();
+        //return await _db.Walks.Include(tmp=>tmp.Difficulty).Include(tmp=>tmp.Region).ToListAsync();
     }
     
     public async Task<Walks?> GetByIdAsync(Guid id)
