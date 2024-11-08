@@ -20,33 +20,53 @@ public class WalksRepository : IWalkRepository
         return walks;
     }
 
-    public async Task<List<Walks>> GetAllAsync(string? filterOn = null, string? filterQuery = null)
+    public async Task<List<Walks>> GetAllAsync(string? filterOn = null, string? filterQuery = null,
+        string? sortBy = null, bool? isAscending = true, int pageNumber = 1, int pageSize = 100
+        )
     {
-        var walks = _db.Walks.Include(tmp=>tmp.Difficulty)
-            .Include(tmp=>tmp.Region).AsQueryable();
+        var walks = _db.Walks.Include(tmp => tmp.Difficulty)
+            .Include(tmp => tmp.Region).AsQueryable();
         if (!string.IsNullOrWhiteSpace(filterQuery) && !string.IsNullOrWhiteSpace(filterOn))
         {
             if (filterOn.Equals(nameof(Walks.Name), StringComparison.OrdinalIgnoreCase))
             {
-                walks = walks.Where(tmp =>tmp.Name != null && tmp.Name.Contains(filterQuery));
+                walks = walks.Where(tmp => tmp.Name != null && tmp.Name.Contains(filterQuery));
             }
             else if (filterOn.Equals(nameof(Walks.Description), StringComparison.OrdinalIgnoreCase))
             {
-                walks = walks.Where(tmp =>tmp.Description != null && tmp.Description.Contains(filterQuery));
+                walks = walks.Where(tmp => tmp.Description != null && tmp.Description.Contains(filterQuery));
             }
         }
 
-        return await walks.ToListAsync();
+        if (!string.IsNullOrWhiteSpace(sortBy))
+        {
+            bool ascending = isAscending ?? true;
+            if (sortBy.Equals(nameof(Walks.Name), StringComparison.OrdinalIgnoreCase))
+            {
+                walks = ascending
+                    ? walks.OrderBy(tmp => tmp.Name)
+                    : walks.OrderByDescending(tmp => tmp.Name);
+            }
+            else if (sortBy.Equals(nameof(Walks.LengthInKm), StringComparison.OrdinalIgnoreCase))
+            {
+                walks = ascending
+                    ? walks.OrderBy(tmp => tmp.LengthInKm)
+                    : walks.OrderByDescending(tmp => tmp.LengthInKm);
+            }
+        }
+
+        var skipResult = (pageNumber-1)*pageSize;
+        return await walks.Skip(skipResult).Take(pageSize).ToListAsync();
         //return await _db.Walks.Include(tmp=>tmp.Difficulty).Include(tmp=>tmp.Region).ToListAsync();
     }
-    
+
     public async Task<Walks?> GetByIdAsync(Guid id)
     {
-      var region = await _db.Walks
-          .Include(tmp => tmp.Difficulty)
-          .Include(tmp => tmp.Region)
-          .FirstOrDefaultAsync(x => x.Id == id);
-      return region ?? null;
+        var region = await _db.Walks
+            .Include(tmp => tmp.Difficulty)
+            .Include(tmp => tmp.Region)
+            .FirstOrDefaultAsync(x => x.Id == id);
+        return region ?? null;
     }
 
     public async Task<Walks?> UpdateAsync(Guid id, Walks walks)
@@ -56,6 +76,7 @@ public class WalksRepository : IWalkRepository
         {
             return null;
         }
+
         existingWalks.Name = walks.Name;
         existingWalks.Description = walks.Description;
         existingWalks.LengthInKm = walks.LengthInKm;
@@ -67,11 +88,12 @@ public class WalksRepository : IWalkRepository
 
     public async Task<Walks?> DeleteAsync(Guid id)
     {
-        var existingWalk =await _db.Walks.FirstOrDefaultAsync(x => x.Id == id);
+        var existingWalk = await _db.Walks.FirstOrDefaultAsync(x => x.Id == id);
         if (existingWalk == null)
         {
             return null;
         }
+
         _db.Walks.Remove(existingWalk);
         await _db.SaveChangesAsync();
         return existingWalk;

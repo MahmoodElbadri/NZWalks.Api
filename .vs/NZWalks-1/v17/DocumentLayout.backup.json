@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\mahmo\\source\\repos\\NZWalks-1\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B0F5BA93-F0EC-4C56-B782-E841DC102CEA}|NZWalks.Api\\NZWalks.Api.csproj|c:\\users\\mahmo\\source\\repos\\nzwalks-1\\nzwalks.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B0F5BA93-F0EC-4C56-B782-E841DC102CEA}|NZWalks.Api\\NZWalks.Api.csproj|solutionrelative:nzwalks.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B0F5BA93-F0EC-4C56-B782-E841DC102CEA}|NZWalks.Api\\NZWalks.Api.csproj|c:\\users\\mahmo\\source\\repos\\nzwalks-1\\nzwalks.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B0F5BA93-F0EC-4C56-B782-E841DC102CEA}|NZWalks.Api\\NZWalks.Api.csproj|solutionrelative:nzwalks.api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\mahmo\\source\\repos\\NZWalks-1\\NZWalks.Api\\appsettings.json",
+              "RelativeDocumentMoniker": "NZWalks.Api\\appsettings.json",
+              "ToolTip": "C:\\Users\\mahmo\\source\\repos\\NZWalks-1\\NZWalks.Api\\appsettings.json \u2B24",
+              "RelativeToolTip": "NZWalks.Api\\appsettings.json \u2B24",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-11-05T20:12:28.052Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\mahmo\\source\\repos\\NZWalks-1\\NZWalks.Api\\Program.cs",
+              "RelativeDocumentMoniker": "NZWalks.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\mahmo\\source\\repos\\NZWalks-1\\NZWalks.Api\\Program.cs",
+              "RelativeToolTip": "NZWalks.Api\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-05T20:10:52.733Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
