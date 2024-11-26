@@ -14,7 +14,7 @@ To get started with this project:
 
 1. Clone the repository:
     ```bash
-    git clone (https://github.com/MahmoodElbadri/NZWalks.Api.git)
+    git clone https://github.com/MahmoodElbadri/NZWalks.Api.git
     cd NZWalks.Api
     ```
 
